@@ -14,6 +14,15 @@ torchaudio>=2.2.0                 # Audio utilities for PyTorch
 # ── Translation (Hindi → English) ─────────────────────────────────────────────
 deep-translator>=1.11.4           # Lightweight translation wrapper (Google backend)
 
+# ── Markdown rendering ─────────────────────────────────────────────
+Markdown
+
+# ── Environment variables ─────────────────────────────────────────────
+python-dotenv
+
+# ── Sarvam AI (Hinglish) ─────────────────────────────────────────────
+sarvamai
+
 # ── LLM Orchestration — LangChain LCEL + Mistral ──────────────────────────────
 langchain>=0.2.0
 langchain-core>=0.2.0
