@@ -1,54 +1,55 @@
-# ── AI Meeting Assistant ── requirements.txt ──────────────────────────────────
-# Python >= 3.10 recommended
+# AI Video Assistant - Python dependencies
+#
+# Install with:   pip install -r requirements.txt
+#
+# FFmpeg is also required but is NOT a pip package. It is a system program.
+#   Windows: winget install Gyan.FFmpeg
+#   macOS:   brew install ffmpeg
+#   Linux:   sudo apt install ffmpeg
 
-# ── Audio / Video acquisition ─────────────────────────────────────────────────
-yt-dlp>=2024.4.9                  # Download audio from YouTube URLs
-pydub>=0.25.1                     # Audio file manipulation / format conversion
-ffmpeg-python>=0.2.0              # FFmpeg bindings (FFmpeg binary must be installed separately)
 
-# ── Speech-to-Text (local Whisper) ────────────────────────────────────────────
-openai-whisper>=20231117          # OpenAI Whisper (runs locally)
-torch==2.2.1                      # PyTorch backend for Whisper
-torchvision==0.17.1
-torchaudio==2.2.1                 # Audio utilities for PyTorch
+# ─── Web interface ───────────────────────────────────────────────────────────
+streamlit                     # app.py - the whole UI
+markdown                      # app.py - renders LLM markdown inside HTML cards
 
-# ── Translation (Hindi → English) ─────────────────────────────────────────────
-deep-translator>=1.11.4           # Lightweight translation wrapper (Google backend)
 
-# ── Markdown rendering ─────────────────────────────────────────────
-Markdown
+# ─── Audio: download, convert, chunk ─────────────────────────────────────────
+yt-dlp                        # utils/audio_processor.py - YouTube audio download
+pydub                         # utils/audio_processor.py, core/transcriber.py - WAV conversion and splitting
 
-# ── Environment variables ─────────────────────────────────────────────
-python-dotenv
 
-# ── Sarvam AI (Hinglish) ─────────────────────────────────────────────
-sarvamai
+# ─── Speech to text ──────────────────────────────────────────────────────────
+openai-whisper                # core/transcriber.py - local English transcription with segment timings
+requests                      # core/transcriber.py - calls the Sarvam AI Hinglish endpoint
 
-# ── LLM Orchestration — LangChain LCEL + Mistral ──────────────────────────────
-langchain>=0.2.0
-langchain-core>=0.2.0
-langchain-community>=0.2.0
-langchain-mistralai>=0.1.0        # LangChain wrapper for Mistral API
-mistralai>=0.4.0                  # Official Mistral Python client
 
-# ── RAG Pipeline ──────────────────────────────────────────────────────────────
-chromadb>=0.5.0                   # Local vector store
-sentence-transformers>=3.0.0      # HuggingFace embedding models
-langchain-huggingface>=0.0.3      # LangChain ↔ HuggingFace embeddings bridge
-huggingface-hub>=0.23.0           # Model downloading from HuggingFace Hub
-tiktoken>=0.7.0                   # Token counting for text splitting
+# ─── LLM orchestration ───────────────────────────────────────────────────────
+langchain-core                # prompts, output parsers, Runnable chains, Document
+langchain-text-splitters      # RecursiveCharacterTextSplitter
+langchain-mistralai           # ChatMistralAI - summary, extraction, grounded chat
 
-# ── Streamlit UI ──────────────────────────────────────────────────────────────
-streamlit>=1.35.0
-streamlit-extras>=0.4.0           # Additional Streamlit widgets / utilities
-watchdog>=4.0.0                   # File-change watcher (improves Streamlit hot-reload)
 
-# ── PDF & TXT Export ──────────────────────────────────────────────────────────
-reportlab>=4.2.0                  # PDF generation
-fpdf2>=2.7.9                      # Lightweight alternative PDF library
+# ─── Embeddings and vector store ─────────────────────────────────────────────
+langchain-chroma              # core/vector_store.py - Chroma wrapper
+langchain-huggingface         # core/vector_store.py - HuggingFaceEmbeddings
+sentence-transformers         # loads the all-MiniLM-L6-v2 embedding model
 
-# ── Utilities ─────────────────────────────────────────────────────────────────
-python-dotenv>=1.0.0              # Load API keys from .env
-numpy>=1.26.0
-tqdm>=4.66.0                      # Progress bars
-requests>=2.32.0
+
+# ─── Configuration ───────────────────────────────────────────────────────────
+python-dotenv                 # core/config.py - reads the .env file
+
+
+# ─── Compatibility ───────────────────────────────────────────────────────────
+# Python 3.13 removed the "audioop" module from the standard library, and pydub
+# imports it. This backport restores it. Ignored on Python 3.12 and older.
+audioop-lts; python_version >= "3.13"
+
+
+# ─── Installed automatically as dependencies of the above ────────────────────
+# torch and numba        (via openai-whisper)      - large download, ~2 GB
+# chromadb               (via langchain-chroma)
+# transformers, huggingface-hub, numpy, scipy  (via sentence-transformers)
+# langchain-core         (via the langchain-* packages)
+#
+# There is no need to list them here. pip resolves them, and pinning them by
+# hand is the usual cause of version conflicts.
