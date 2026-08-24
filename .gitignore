@@ -1,0 +1,48 @@
+# ─── Secrets ─────────────────────────────────────────────────────────────────
+# Never commit API keys. This is the most important line in this file.
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+
+# ─── Virtual environment ─────────────────────────────────────────────────────
+venv/
+.venv/
+env/
+ENV/
+
+# ─── Python ──────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# ─── Generated data ──────────────────────────────────────────────────────────
+# Downloaded audio and the vector database are rebuilt from the source video,
+# so there is no reason to store them in the repo. They are also large.
+downloades/
+vector_db/
+*.wav
+*.mp3
+*.m4a
+*.webm
+*.opus
+*.mp4
+
+# ─── Whisper model cache ─────────────────────────────────────────────────────
+.cache/
+*.pt
+
+# ─── Editors and OS ──────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini
