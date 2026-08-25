@@ -14,7 +14,7 @@ markdown                      # app.py - renders LLM markdown inside HTML cards
 
 
 # ─── Audio: download, convert, chunk ─────────────────────────────────────────
-yt-dlp                        # utils/audio_processor.py - YouTube audio download
+yt-dlp[default]                        # utils/audio_processor.py - YouTube audio download
 pydub                         # utils/audio_processor.py, core/transcriber.py - WAV conversion and splitting
 
 
