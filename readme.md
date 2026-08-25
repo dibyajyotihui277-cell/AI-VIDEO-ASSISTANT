@@ -21,8 +21,7 @@
   <img width="1919" height="893" alt="Screenshot 2026-08-22 183350" src="https://github.com/user-attachments/assets/383f2076-7828-4bef-9d77-b4835a84669f" />
 </p>
 
-### 💡 Key Takeaways, Topics and Quotes<img width="1901" height="914" alt="Screenshot 2026-08-23 113826" src="https://github.com/user-attachments/assets/521addcc-2d4b-4467-a78b-54a4da60ae50" />
-
+### 💡 Key Takeaways, Topics and Quotes
 
 <p align="center">
   <img width="1915" height="902" alt="Screenshot 2026-08-23 113905" src="https://github.com/user-attachments/assets/27b24c9b-4fd5-4108-9315-4a0c615cfea3" />
